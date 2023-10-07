@@ -63,9 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void startGame() {
-    setState(() {
-      moviments.clear();
-    });
     numberOfPieces = int.tryParse(sticksTotalController.text) ?? 0;
     limit = int.tryParse(sticksLimitController.text) ?? 0;
 
@@ -82,6 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
           const Color.fromARGB(255, 243, 161, 161));
       return;
     }
+
+    setState(() {
+      moviments.clear();
+    });
 
     setState(() {
       computerPlay = (numberOfPieces % (limit + 1)) == 0;
@@ -172,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void endGame() {
     String result = computerPlay ? "Você ganhou!" : "Computador ganhou!";
     messageDialog(result, 'Fim do jogo.');
+    moviments.add(result);
 
     restartGame();
   }
